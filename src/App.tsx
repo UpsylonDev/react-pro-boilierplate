@@ -12,6 +12,7 @@ import './App.css'
 import { TodoProvider } from './stores'
 // Import du composant Todo que nous avons créé
 import Todo from './components/Todo'
+import Posts from './components/Posts'
 
 // Composant fonctionnel App - composant racine
 // Équivalent à App.vue en Vue avec <script setup>
@@ -19,7 +20,7 @@ function App() {
   // État local pour le compteur de démonstration
   // useState retourne [valeur, fonction_de_mise_à_jour]
   // Équivalent à const count = ref(0) en Vue
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState<number>(0)
 
   // Rendu JSX du composant - équivalent au template en Vue
   return (
@@ -53,13 +54,16 @@ function App() {
         </button>
         <p>
           {/* Balise <code> pour styler le nom du fichier */}
-          Edit <code>src/App.jsx</code> and save to test HMR
+          Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
       
       {/* Notre composant Todo personnalisé */}
       {/* Il aura accès au TodoProvider grâce à l'encapsulation */}
       <Todo />
+
+      {/* Composant Posts pour afficher les données de l'API */}
+      <Posts />
     </TodoProvider>
   )
 }

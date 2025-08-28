@@ -1,6 +1,6 @@
 // Import des hooks React et du store personnalisé
 // useState : hook pour la gestion d'état local (équivalent à ref() en Vue)
-import { useState } from 'react'
+import { useState, FormEvent } from 'react'
 // Import du hook personnalisé pour accéder au store des todos
 import { useTodos } from '../stores'
 // Import des styles CSS pour ce composant
@@ -12,7 +12,7 @@ export default function Todo() {
   // Hook useState pour gérer l'état local de l'input
   // [getter, setter] = useState(valeurInitiale)
   // Équivalent à const inputValue = ref('') en Vue
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState<string>('')
   
   // Utilisation du hook personnalisé pour accéder au store
   // Destructuration de l'objet retourné par useTodos()
@@ -21,7 +21,7 @@ export default function Todo() {
 
   // Fonction de gestion de soumission du formulaire
   // Équivalent à une méthode dans l'objet methods en Vue Options API
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     // Empêche le comportement par défaut du formulaire (rechargement de page)
     e.preventDefault()
     

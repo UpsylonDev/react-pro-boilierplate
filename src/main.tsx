@@ -14,7 +14,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 
 // Import du composant racine de l'application
-import App from './App.jsx'
+import App from './App'
 
 // Creation et montage de l'application React
 // 1. createRoot() trouve l'element DOM avec l'id "root" dans index.html
