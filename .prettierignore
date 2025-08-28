@@ -1,0 +1,14 @@
+dist
+node_modules
+.next
+.nuxt
+.output
+.vitepress/dist
+.serverless
+.parcel-cache
+.cache
+.nyc_output
+coverage
+*.tsbuildinfo
+.DS_Store
+*.log
