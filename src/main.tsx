@@ -13,6 +13,10 @@ import { createRoot } from 'react-dom/client'
 // Import des styles globaux CSS
 import './index.css'
 
+// Import des polices Google Fonts
+import '@fontsource/roboto/500.css'
+import '@fontsource/rubik-one'
+
 // Import du composant racine de l'application
 import App from './App'
 
