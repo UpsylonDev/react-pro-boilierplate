@@ -4,6 +4,7 @@
 import { usePosts } from '../hooks/usePosts'
 import { Button } from '../ui/Button/Button'
 import './Posts.css'
+import TheTestBtn from './shared/TheTestBtn'
 
 // Composant principal pour afficher la liste des posts
 // Gère 3 états : loading, error, et success avec données
@@ -59,6 +60,9 @@ export default function Posts() {
           </Button>
           <span className="posts-count">{posts.length} posts</span>
         </div>
+          <div className="mt-4 flex justify-center">
+            <TheTestBtn />
+          </div>
       </div>
       
       {/* Grille responsive des posts - CSS Grid pour l'adaptabilité */}
