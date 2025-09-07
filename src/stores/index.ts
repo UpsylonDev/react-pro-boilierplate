@@ -3,7 +3,8 @@
 // import { TodoProvider, useTodos } from '../stores'
 
 // Export de tout ce qui concerne les todos
-export { TodoProvider, useTodos } from './todo'
+export { TodoProvider } from './todo'
+export { useTodos } from '../hooks/useTodos'
 
 // Ici on pourra ajouter d'autres stores à l'avenir :
 // export { UserProvider, useUser } from './user'
