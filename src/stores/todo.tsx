@@ -2,7 +2,12 @@
 // createContext : pour créer un contexte global (équivalent à provide/inject Vue)
 // useContext : pour consommer le contexte (équivalent à inject Vue)
 // useReducer : pour la gestion d'état complexe (équivalent à Vuex/Pinia)
-import { createContext, useContext, useReducer, ReactNode } from 'react'
+import {
+  createContext,
+  // useContext,
+  useReducer,
+  ReactNode
+} from 'react'
 import { Todo, TodoContextType, TodoAction } from '../types/todo'
 
 // Création du contexte Todo - équivalent à createApp().provide() en Vue
@@ -38,6 +43,14 @@ const todoReducer = (state: Todo[], action: TodoAction): Todo[] => {
       // Filter pour garder tous les todos sauf celui avec l'id donné
       return state.filter(todo => todo.id !== action.id)
     
+    case 'UPDATE_TODO':
+      // Map sur tous les todos pour modifier le texte de celui qui correspond à l'id
+      return state.map(todo => 
+        todo.id === action.id 
+          ? { ...todo, text: action.text, updatedAt: new Date() } // Spread + modification du texte et updatedAt
+          : todo // Retour du todo inchangé
+      )
+    
     default:
       // Toujours retourner l'état actuel si l'action n'est pas reconnue
       return state
@@ -71,28 +84,20 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     dispatch({ type: 'DELETE_TODO', id })
   }
 
+  // Modifier le texte d'un todo : dispatch UPDATE_TODO avec l'id et le nouveau texte
+  const updateTodo = (id: number, text: string) => {
+    dispatch({ type: 'UPDATE_TODO', id, text })
+  }
+
   // Rendu du Provider avec la valeur du contexte
   // value : objet contenant l'état et les méthodes accessibles aux enfants
   // children : tous les composants enfants qui pourront accéder au contexte
   return (
-    <TodoContext.Provider value={{ todos, addTodo, toggleTodo, deleteTodo }}>
+    <TodoContext.Provider value={{ todos: todos, addTodo, toggleTodo, deleteTodo, updateTodo }}>
       {children}
     </TodoContext.Provider>
   )
 }
 
-// Hook personnalisé pour utiliser le contexte Todo
-// Équivalent à inject() en Vue mais avec vérification d'erreur
-export const useTodos = () => {
-  // useContext récupère la valeur du contexte TodoContext
-  const context = useContext(TodoContext)
-  
-  // Vérification que le hook est utilisé dans un composant enfant du Provider
-  // Équivalent à vérifier qu'on a bien fait provide() en Vue
-  if (!context) {
-    throw new Error('useTodos must be used within a TodoProvider')
-  }
-  
-  // Retourne l'objet contexte (todos, addTodo, toggleTodo, deleteTodo)
-  return context
-}
+// Exportez uniquement le Provider et le contexte si besoin
+export { TodoContext }
