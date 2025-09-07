@@ -24,7 +24,10 @@ import App from './App'
 // 1. createRoot() trouve l'element DOM avec l'id "root" dans index.html
 // 2. .render() monte l'application dans cet element
 // Equivalent a createApp(App).mount('#root') en Vue
-createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById('root')
+if (!rootElement) throw new Error('Root element not found')
+
+createRoot(rootElement).render(
   // StrictMode encapsule l'application pour les verifications de developpement
   // - Detecte les composants avec des effets de bord
   // - Avertit des APIs depreciees
